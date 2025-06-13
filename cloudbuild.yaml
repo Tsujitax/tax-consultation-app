@@ -1,0 +1,27 @@
+steps:
+  # Dockerイメージをビルド
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/tax-consultation-app', '.']
+  
+  # イメージをプッシュ
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/tax-consultation-app']
+  
+  # Cloud Runにデプロイ
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'tax-consultation-app'
+      - '--image=gcr.io/$PROJECT_ID/tax-consultation-app'
+      - '--region=asia-northeast1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--set-env-vars=GEMINI_API_KEY=${_GEMINI_API_KEY}'
+
+substitutions:
+  _GEMINI_API_KEY: 'YOUR_API_KEY_HERE'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

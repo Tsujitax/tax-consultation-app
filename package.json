@@ -1,0 +1,23 @@
+{
+  "name": "tax-consultation-scolding-app",
+  "version": "1.0.0",
+  "description": "税金に関する不適切な相談に対して正しい道を示すWebアプリケーション",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "tax",
+    "consultation",
+    "education"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
